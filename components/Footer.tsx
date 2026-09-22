@@ -91,7 +91,7 @@ export default function Footer() {
               alt="La Fête Moments"
               width={180}
               height={56}
-              className="h-11 w-auto object-contain opacity-85"
+              className="h-11 w-auto object-contain object-left opacity-85"
             />
             <p className="text-white/35 text-[9px] tracking-[0.28em] uppercase">Creations for Celebrations</p>
             <div className="flex items-start gap-2 text-white/40 text-[12px] mt-1">
