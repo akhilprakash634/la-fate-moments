@@ -31,7 +31,8 @@ export default function Footer() {
         <motion.div
           className="relative z-10"
           initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "0px" }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="text-[9px] tracking-[0.35em] uppercase text-white/60 mb-6">La Fête Moments</p>
