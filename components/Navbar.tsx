@@ -106,7 +106,7 @@ export default function Navbar() {
             alt="La Fête Moments"
             width={170}
             height={54}
-            className="h-10 w-auto object-contain brightness-0 invert"
+            className="h-10 w-auto object-contain"
           />
           <button
             id="mobile-menu-close"
