@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -11,21 +12,49 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
 }
 
-export default function Hero() {
-  return (
-    <section className="relative w-full h-screen min-h-[700px] overflow-hidden" aria-label="Hero">
+const HERO_IMAGES = [
+  '/hero.jpg',
+  '/moments/wedding.jpg',
+  '/moments/private.jpg',
+  '/moments/anniversary.jpg',
+]
 
-      {/* Full-screen background image */}
-      <Image
-        src="/hero.jpg"
-        alt="La Fête Moments — luxury celebration event in Abu Dhabi"
-        fill
-        priority
-        quality={95}
-        className="object-cover object-center"
-        style={{ animation: 'heroZoom 12s ease-out forwards' }}
-        sizes="100vw"
-      />
+export default function Hero() {
+  const [currentImageIdx, setCurrentImageIdx] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIdx((prev) => (prev + 1) % HERO_IMAGES.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <section className="relative w-full h-screen min-h-[700px] overflow-hidden bg-[#171717]" aria-label="Hero">
+
+      {/* Cross-fading background images */}
+      {HERO_IMAGES.map((src, i) => (
+        <div
+          key={src}
+          className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out"
+          style={{
+            opacity: currentImageIdx === i ? 1 : 0,
+            zIndex: currentImageIdx === i ? 1 : 0,
+          }}
+        >
+          <Image
+            src={src}
+            alt="La Fête Moments — luxury celebration event in Abu Dhabi"
+            fill
+            priority={i === 0}
+            quality={95}
+            className={`object-cover object-center ${
+              currentImageIdx === i ? 'animate-hero-zoom' : 'scale-[1.06]'
+            }`}
+            sizes="100vw"
+          />
+        </div>
+      ))}
 
       {/* Gradient: strong left → fading right (per brief) */}
       <div
