@@ -11,15 +11,12 @@ interface AnimatedSectionProps {
 }
 
 export default function AnimatedSection({ children, className = '', delay = 0, once = true }: AnimatedSectionProps) {
-  const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once, margin: '-50px' })
-
   return (
     <motion.div
-      ref={ref}
       className={className}
       initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once, margin: '0px' }}
       transition={{ duration: 0.85, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
