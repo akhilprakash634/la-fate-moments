@@ -47,7 +47,7 @@ export default function Hero() {
             alt="La Fête Moments — luxury celebration event in Abu Dhabi"
             fill
             priority={i === 0}
-            quality={95}
+            quality={100}
             className={`object-cover object-center ${
               currentImageIdx === i ? 'animate-hero-zoom' : 'scale-[1.06]'
             }`}
