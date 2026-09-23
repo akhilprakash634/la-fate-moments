@@ -12,14 +12,13 @@ const navLinks = [
   { href: '/our-story', label: 'Our Story' },
   { href: '/contact', label: 'Contact' },
 ]
-
-const HERO_PAGES = ['/', '/moments', '/services', '/our-story', '/contact']
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
-  const isHeroPage = HERO_PAGES.includes(pathname)
+  
+  // Only the home page and individual moment detail pages have dark full-screen hero imagery.
+  const isHeroPage = pathname === '/' || (pathname.startsWith('/moments/') && pathname !== '/moments')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
